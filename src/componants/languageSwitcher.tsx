@@ -1,0 +1,24 @@
+import { motion } from "motion/react";
+
+type SwitchLanguageProps = {
+  onClick: () => void;
+};
+
+export default function SwitchLanguage({ onClick }: SwitchLanguageProps) {
+  return (
+    <div className="flex items-start justify-end">
+      <motion.label
+        className="swap btn btn-square m-4"
+        whileHover={{
+          scale: 1.1,
+          // Will be used when gesture starts
+          transition: { duration: 0.1 },
+        }}
+      >
+        <input type="checkbox" onClick={onClick} />
+        <div className="swap-on">EN</div>
+        <div className="swap-off">AR</div>
+      </motion.label>
+    </div>
+  );
+}
