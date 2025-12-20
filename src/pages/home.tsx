@@ -1,16 +1,24 @@
 import { useContext } from "react";
-import { AppContext } from "../componants/AppContext";
+import { AppContext } from "../componants/Context";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { lang } = useContext(AppContext);
 
   return (
-    <>
+    <main className="flex flex-col items-center justify-center gap-5 flex-1">
       {lang === "ar" ? (
-        <h1 className="text-2xl font-bold text-center">!مرحبا بكم في بكاسة</h1>
+        <h1 className="font-bold text-center">اهلا يا بكس منك ليه</h1>
       ) : (
-        <h1 className="text-2xl font-bold text-center">Welcome to Bakasa!</h1>
+        <h1 className="font-bold text-center">Welcome to Bakasa!</h1>
       )}
-    </>
+      <Link to="/categories" className="btn btn-primary mx-auto">
+        {lang === "ar" ? (
+          <h1 className="font-bold text-center">يلانبدأ </h1>
+        ) : (
+          <h1 className="font-bold text-center">Start</h1>
+        )}
+      </Link>
+    </main>
   );
 }

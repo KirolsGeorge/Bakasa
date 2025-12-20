@@ -4,7 +4,7 @@ import Header from "./componants/Header";
 import Home from "./pages/home";
 import Categories from "./pages/categories";
 
-import { AppProvider } from "./componants/headerContext";
+import { AppProvider } from "./componants/AppContext";
 
 const router = createBrowserRouter([
   {

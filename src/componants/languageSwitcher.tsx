@@ -11,7 +11,6 @@ export default function SwitchLanguage({ onClick }: SwitchLanguageProps) {
         className="swap btn btn-square m-4"
         whileHover={{
           scale: 1.1,
-          // Will be used when gesture starts
           transition: { duration: 0.1 },
         }}
       >
