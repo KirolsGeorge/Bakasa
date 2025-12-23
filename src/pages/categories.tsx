@@ -1,5 +1,5 @@
 // @ts-ignore
-import CatItem from "../componants/catItem";
+import CategoriesItem from "../componants/UI/categoriesItem";
 // @ts-ignore
 import data from "../topics";
 import { useContext } from "react";
@@ -22,9 +22,13 @@ const typedData = data as Data;
 export default function Categories() {
   const { lang } = useContext(AppContext);
   return (
-    <div>
-      {typedData.categories.map((cat, index) => (
-        <CatItem key={index} name={cat.name[lang as "ar" | "en"]} />
+    <div className="flex flex-wrap gap-3 justify-center items-center">
+      {typedData.categories.map((cat) => (
+        <CategoriesItem
+          key={cat.name[lang as "en"]}
+          name={cat.name[lang as "ar" | "en"]}
+          cat={cat.name["en"]}
+        />
       ))}
     </div>
   );

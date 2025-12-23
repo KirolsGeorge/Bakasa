@@ -1,9 +1,9 @@
-import SwitchLanguage from "../componants/languageSwitcher";
+import SwitchLanguage from "../languageSwitcher";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AppContext } from "./Context";
+import { AppContext } from "../Context";
 import { useLocation } from "react-router-dom";
 
 export default function Header() {

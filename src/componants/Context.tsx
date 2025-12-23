@@ -1,13 +1,13 @@
 import { createContext } from "react";
 
-type AppState = {
+type langStetType = {
   lang: string;
   setLang: (lang: string) => void;
 };
 
-const defaultState: AppState = {
+const defaultState: langStetType = {
   lang: "ar",
   setLang: () => {},
 };
 
-export const AppContext = createContext<AppState>(defaultState);
+export const AppContext = createContext<langStetType>(defaultState);

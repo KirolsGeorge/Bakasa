@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { AppContext } from "./Context";
 
-function AppProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState("ar");
+type AppProviderProps = {
+  children: React.ReactNode;
+};
+
+function AppProvider({ children }: AppProviderProps) {
+  const [lang, setLang] = useState<string>("ar");
 
   return (
     <AppContext.Provider value={{ lang, setLang }}>
