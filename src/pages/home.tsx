@@ -12,7 +12,7 @@ export default function HomePage() {
       ) : (
         <h1 className="font-bold text-center">Welcome to Bakasa!</h1>
       )}
-      <Link to="/users" className="btn btn-primary mx-auto">
+      <Link to="/categories" className="btn btn-primary mx-auto">
         {lang === "ar" ? (
           <h1 className="font-bold text-center">يلانبدأ </h1>
         ) : (
