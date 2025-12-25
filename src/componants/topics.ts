@@ -1,3 +1,6 @@
+import { image } from "motion/react-client";
+import Categories from "../pages/categories";
+
 const data = {
   categories: [
     {
@@ -19,6 +22,7 @@ const data = {
         { en: "Jeep Wrangler", ar: "جيب رانجلر" },
         { en: "Lamborghini Urus", ar: "لامبورغيني أوروس" },
       ],
+      image: `Cars.png`,
     },
     {
       name: { en: "Cartoons", ar: "كرتون" },
@@ -39,6 +43,7 @@ const data = {
         { en: "Spider-Man", ar: "أبطال الديجيتال" },
         { en: "The Lion King", ar: "عهد الأصدقاء" },
       ],
+      image: `Cartoons.png`,
     },
     {
       name: { en: "Animals", ar: "حيوانات" },
@@ -59,6 +64,7 @@ const data = {
         { en: "Snake", ar: "ثعبان" },
         { en: "Bear", ar: "دب" },
       ],
+      image: `Animals.png`,
     },
     {
       name: { en: "Clothes", ar: "ملابس" },
@@ -79,6 +85,7 @@ const data = {
         { en: "Hat", ar: "قبعة" },
         { en: "Blouse", ar: "بلوزة" },
       ],
+      image: `Clothes.png`,
     },
     {
       name: { en: "Meals", ar: "وجبات" },
@@ -99,6 +106,7 @@ const data = {
         { en: "Mac and Cheese", ar: "مضغوط" },
         { en: "Omelette", ar: "حمام محشي" },
       ],
+      image: `Meals.png`,
     },
     {
       name: { en: "Jobs", ar: "وظائف" },
@@ -119,6 +127,7 @@ const data = {
         { en: "Artist", ar: "فنان" },
         { en: "Dentist", ar: "طبيب أسنان" },
       ],
+      image: `Jobs.png`,
     },
     {
       name: { en: "Movies", ar: "أفلام" },
@@ -139,6 +148,7 @@ const data = {
         { en: "The Avengers", ar: "طباخ الريس" },
         { en: "Goodfellas", ar: "جعلوني مجرماً" },
       ],
+      image: `Movies.png`,
     },
     {
       name: { en: "Places", ar: "أماكن" },
@@ -159,6 +169,7 @@ const data = {
         { en: "Niagara Falls", ar: "شلالات نياجرا" },
         { en: "Mount Everest", ar: "جبل إيفرست" },
       ],
+      image: `Places.png`,
     },
     {
       name: { en: "Football Players", ar: "لاعبي كرة قدم" },
@@ -179,6 +190,7 @@ const data = {
         { en: "Diego Maradona", ar: "محمود الخطيب" },
         { en: "Pelé", ar: "محمد أبو تريكة" },
       ],
+      image: `Football_Players.png`,
     },
     {
       name: { en: "Famous Actors", ar: "ممثلين مشهورين" },
@@ -199,6 +211,7 @@ const data = {
         { en: "Scarlett Johansson", ar: "هند صبري" },
         { en: "Al Pacino", ar: "رشدي أباظة" },
       ],
+      image: `Famous_Actors.png`,
     },
     {
       name: { en: "Makeup", ar: "مكياج" },
@@ -219,8 +232,10 @@ const data = {
         { en: "Face Powder", ar: "بودرة وجه" },
         { en: "Makeup Brushes", ar: "فرش مكياج" },
       ],
+      image: `Makeup.png`,
     },
   ],
 };
 
 export default data;
+

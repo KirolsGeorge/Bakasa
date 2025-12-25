@@ -8,7 +8,7 @@ export default function SwitchLanguage({ onClick }: SwitchLanguageProps) {
   return (
     <div className="flex items-start justify-end">
       <motion.label
-        className="swap btn btn-square m-4"
+        className="swap btn btn-square"
         whileHover={{
           scale: 1.1,
           transition: { duration: 0.1 },

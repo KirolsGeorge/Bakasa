@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { AppContext } from "../componants/Context";
 import { Link } from "react-router-dom";
 
-export default function HomePage() {
-  const { lang } = useContext(AppContext);
+type HomePageProps = {
+  lang: string;
+};
 
+export default function HomePage({ lang }: HomePageProps) {
   return (
     <main className="flex flex-col items-center justify-center gap-5 flex-1">
       {lang === "ar" ? (

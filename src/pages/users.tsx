@@ -1,63 +1,80 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import InputItem from "../componants/UI/inputItem";
-import ViewItem from "../componants/UI/viewItem";
+type User = {
+  id: string;
+  name: string;
+};
 
-export default function UsersPage() {
-  const [value, setValue] = useState<string>("");
-  const [users, setUsers] = useState<string[]>([]);
+export default function UsersPage({ lang }: { lang: string }) {
+  const [users, setUsers] = useState<User[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const value = inputValue.trim();
 
-  const inputRef = useRef<HTMLInputElement>(null!);
-  let alreadyExists = false;
+  const userExists =
+    value.length > 0 &&
+    users.some((u) => u.name.toLowerCase() === value.trim().toLowerCase());
 
   function addUserHandler() {
-    if (value.trim() === "") return;
-    if (value.length > 3) {
-      if (
-        users.find((user) => user === value.toLocaleLowerCase().trim())
-          ? true
-          : false
-      ) {
-        alreadyExists = true;
-        inputRef.current.value = "";
-        inputRef.current.placeholder = "User already exists";
-        return;
-      }
-      setUsers([...users, value]);
-      inputRef.current.value = "";
-    }
+    if (value.length < 3 || userExists) return;
+
+    const id = crypto.randomUUID?.() ?? Date.now().toString();
+
+    setUsers((prev) => [...prev, { id, name: value }]);
+    setInputValue("");
   }
 
-  function deleteUserHandler(userName: string) {
-    console.log(userName);
-    const filteredUsers = users.filter((user) => user !== userName);
-    setUsers(filteredUsers);
+  function deleteUserHandler(id: string) {
+    setUsers((prev) => prev.filter((user) => user.id !== id));
   }
 
   return (
-    <main className="p-4 flex flex-col gap-3">
-      {alreadyExists && (
-        <span className="text-red-600">User already exists</span>
-      )}
-      {users.length < 3 && <span>Minimum players number is 3</span>}
+    <main className="p-2 flex flex-col gap-2">
+      <section className="rounded-xl flex-1 flex flex-col gap-2">
+        {userExists && (
+          <span className="text-red-600">
+            {lang === "ar" ? "المستخدم موجود بالفعل" : "User already exists"}
+          </span>
+        )}
 
-      {users.map((user, index) => (
-        <ViewItem key={index} userName={user} onDelete={deleteUserHandler} />
-      ))}
-      <InputItem
-        value={value}
-        users={users}
-        setValue={setValue}
-        ref={inputRef}
-        onDelete={deleteUserHandler}
-      />
-      {users.length <= 10 && value.trim().length > 2 && (
+        {users.length <= 2 && (
+          <span className="text-red-600">
+            {lang === "ar" ? "الحد الأدنى 3 لاعبين" : "Minimum 3 players"}
+          </span>
+        )}
+
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className="flex items-center justify-between bg-gray-800 w-full p-3 rounded-xl gap-2"
+          >
+            {user.name}
+            <button
+              key={user.id}
+              type="button"
+              className="rounded-full size-8 flex items-center justify-center bg-linear-to-tr from-fuchsia-500 to-purple-800 text-white hover:opacity-90 active:opacity-80"
+              onClick={() => deleteUserHandler(user.id)}
+            >
+              <FontAwesomeIcon icon={faX} />
+            </button>
+          </div>
+        ))}
+
+        <input
+          className="bg-gray-800 p-3 rounded-xl text-white"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder={lang === "ar" ? "اسم اللاعب" : "Player name"}
+        />
+      </section>
+      {users.length <= 10 && (
         <button
           type="button"
-          className={`border-none flex items-center justify-center bg-gray-800 w-full h-14 p-4 rounded-xl text-gray-300 hover:text-white transition`}
+          className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
           onClick={addUserHandler}
         >
-          + Add Item
+          {lang === "ar" ? "لاعب جديد" : "New Player"}
         </button>
       )}
     </main>
