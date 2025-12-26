@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -18,6 +18,10 @@ export default function UsersPage({
   const [users, setUsers] = useState<User[]>([]);
   const [inputValue, setInputValue] = useState("");
   const value = inputValue.trim();
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
 
   const userExists =
     value.length > 0 &&
@@ -87,17 +91,19 @@ export default function UsersPage({
         </button>
       )}
       <div className="flex flex-1 items-end justify-end">
-        {users.length >= 3 && (
-          <Link
-            to="/RevealPage"
-            className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
-            onClick={() =>
-              setWinner(users[Math.floor(Math.random() * users.length)].name)
-            }
-          >
-            {lang === "ar" ? "يلا بينا" : "Start Game"}
-          </Link>
-        )}
+        {users.length >= 2 &&
+          !userExists && (
+            <Link
+              to="/RevealPage"
+              className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
+              onClick={() => {
+                addUserHandler();
+                setWinner(users[Math.floor(Math.random() * users.length)].name);
+              }}
+            >
+              {lang === "ar" ? "يلا بينا" : "Start Game"}
+            </Link>
+          )}
       </div>
     </main>
   );
