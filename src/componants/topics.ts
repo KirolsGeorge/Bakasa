@@ -1,6 +1,3 @@
-import { image } from "motion/react-client";
-import Categories from "../pages/categories";
-
 const data = {
   categories: [
     {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type User = {
   id: string;
