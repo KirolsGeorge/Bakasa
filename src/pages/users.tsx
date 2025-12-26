@@ -68,14 +68,16 @@ export default function UsersPage({
           </div>
         ))}
 
-        <input
-          className="bg-gray-800 p-3 rounded-xl text-white"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder={lang === "ar" ? "اسم اللاعب" : "Player name"}
-        />
+        {users.length < 10 && (
+          <input
+            className="bg-gray-800 p-3 rounded-xl text-white"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder={lang === "ar" ? "اسم اللاعب" : "Player name"}
+          />
+        )}
       </section>
-      {users.length <= 10 && (
+      {users.length < 10 && (
         <button
           type="button"
           className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
