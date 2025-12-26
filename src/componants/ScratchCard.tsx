@@ -11,7 +11,7 @@ type ScratchCardProps = {
 export default function ScratchCard({
   width,
   height,
-  revealPercent = 50,
+  revealPercent = 35,
   winner,
 }: ScratchCardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

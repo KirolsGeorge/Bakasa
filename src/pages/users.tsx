@@ -90,21 +90,19 @@ export default function UsersPage({
           {lang === "ar" ? "لاعب جديد" : "New Player"}
         </button>
       )}
-      <div className="flex flex-1 items-end justify-end">
-        {users.length >= 2 &&
-          !userExists && (
-            <Link
-              to="/RevealPage"
-              className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
-              onClick={() => {
-                addUserHandler();
-                setWinner(users[Math.floor(Math.random() * users.length)].name);
-              }}
-            >
-              {lang === "ar" ? "يلا بينا" : "Start Game"}
-            </Link>
-          )}
-      </div>
+
+      {users.length >= 2 && !userExists && value.length > 0 && (
+        <Link
+          to="/RevealPage"
+          className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
+          onClick={() => {
+            addUserHandler();
+            setWinner(users[Math.floor(Math.random() * users.length)].name);
+          }}
+        >
+          {lang === "ar" ? "يلا بينا" : "Start Game"}
+        </Link>
+      )}
     </main>
   );
 }
