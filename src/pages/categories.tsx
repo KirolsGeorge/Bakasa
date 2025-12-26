@@ -1,14 +1,9 @@
 import CategoriesItem from "../componants/UI/categoriesItem";
 import data from "../componants/topics";
 
-type categoriesProps = {
-  lang: string;
-};
-
-export default function Categories({ lang }: categoriesProps) {
-  data.categories.map((cat) => console.log(cat.image));
+export default function Categories({ lang }: { lang: string }) {
   return (
-    <div className="flex flex-wrap gap-3 justify-center items-center">
+    <div className="flex flex-wrap gap-3 justify-center items-center pb-3">
       {data.categories.map((cat) => (
         <CategoriesItem
           key={cat.name.en}

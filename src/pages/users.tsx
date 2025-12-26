@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Navigate } from "react-router-dom";
 
 type User = {
   id: string;
   name: string;
 };
 
-export default function UsersPage({ lang }: { lang: string }) {
+export default function UsersPage({
+  lang,
+  setWinner,
+}: {
+  lang: string;
+  setWinner: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const [users, setUsers] = useState<User[]>([]);
   const [inputValue, setInputValue] = useState("");
   const value = inputValue.trim();
@@ -30,8 +37,8 @@ export default function UsersPage({ lang }: { lang: string }) {
   }
 
   return (
-    <main className="p-2 flex flex-col gap-2">
-      <section className="rounded-xl flex-1 flex flex-col gap-2">
+    <main className="p-2 flex flex-col gap-2 flex-1">
+      <section className="rounded-xl flex flex-col gap-2">
         {userExists && (
           <span className="text-red-600">
             {lang === "ar" ? "المستخدم موجود بالفعل" : "User already exists"}
@@ -77,6 +84,19 @@ export default function UsersPage({ lang }: { lang: string }) {
           {lang === "ar" ? "لاعب جديد" : "New Player"}
         </button>
       )}
+      <div className="flex flex-1 items-end justify-end">
+        {users.length >= 3 && (
+          <Link
+            to="/RevealPage"
+            className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
+            onClick={() =>
+              setWinner(users[Math.floor(Math.random() * users.length)].name)
+            }
+          >
+            {lang === "ar" ? "يلا بينا" : "Start Game"}
+          </Link>
+        )}
+      </div>
     </main>
   );
 }

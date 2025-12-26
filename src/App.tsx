@@ -7,6 +7,7 @@ import UsersPage from "./pages/users";
 import RevealPage from "./pages/revealPage";
 
 const App: React.FC = () => {
+  const [winner, setWinner] = useState<string>("None");
   const [lang, setLang] = useState("ar");
 
   const router = createBrowserRouter([
@@ -29,13 +30,13 @@ const App: React.FC = () => {
         },
         {
           path: "/users",
-          element: <UsersPage lang={lang} />,
+          element: <UsersPage lang={lang} setWinner={setWinner} />,
         },
       ],
     },
     {
       path: "/RevealPage",
-      element: <RevealPage winner="kirols" />,
+      element: <RevealPage winner={winner} />,
     },
   ]);
   return <RouterProvider router={router} />;

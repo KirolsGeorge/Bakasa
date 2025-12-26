@@ -18,7 +18,7 @@ export default function Header({ lang, setLang }: HeaderProps) {
     setLang(lang === "ar" ? "en" : "ar");
   }
 
-  function homeNavigate() {
+  function goBackHandler() {
     return navigate(-1);
   }
 
@@ -28,7 +28,7 @@ export default function Header({ lang, setLang }: HeaderProps) {
       {isNotHome && (
         <button
           className="btn btn-circle flex items-center justify-center"
-          onClick={homeNavigate}
+          onClick={goBackHandler}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
