@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -19,13 +19,11 @@ export default function UsersPage({
   const [inputValue, setInputValue] = useState("");
   const value = inputValue.trim();
 
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
-
   const userExists =
     value.length > 0 &&
     users.some((u) => u.name.toLowerCase() === value.trim().toLowerCase());
+
+  const MinimumUsers = users.length >= 2 && !userExists && value.length > 0;
 
   function addUserHandler() {
     if (value.length < 3 || userExists) return;
@@ -49,7 +47,7 @@ export default function UsersPage({
           </span>
         )}
 
-        {users.length <= 2 && (
+        {!MinimumUsers && (
           <span className="text-red-600">
             {lang === "ar" ? "الحد الأدنى 3 لاعبين" : "Minimum 3 players"}
           </span>
@@ -84,17 +82,17 @@ export default function UsersPage({
       {users.length < 10 && (
         <button
           type="button"
-          className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
+          className={`border-none flex items-center justify-center bg-fuchsia-700 w-full p-3 rounded-xl text-black font-bold hover:text-white transition`}
           onClick={addUserHandler}
         >
           {lang === "ar" ? "لاعب جديد" : "New Player"}
         </button>
       )}
 
-      {users.length >= 2 && !userExists && value.length > 0 && (
+      {MinimumUsers && (
         <Link
           to="/RevealPage"
-          className={`border-none flex items-center justify-center bg-gray-800 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
+          className={`border-none flex items-center justify-center bg-blue-400 w-full p-3 rounded-xl text-gray-300 hover:text-white transition`}
           onClick={() => {
             addUserHandler();
             setWinner(users[Math.floor(Math.random() * users.length)].name);
