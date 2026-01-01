@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
 type ScratchCardProps = {
   width: number;
@@ -74,8 +73,6 @@ export default function ScratchCard({
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div style={{ width, height, position: "relative", userSelect: "none" }}>
         <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-center">
-          The Winner is:
-          <br />
           {winner}
         </div>
 
@@ -92,14 +89,6 @@ export default function ScratchCard({
           />
         )}
       </div>
-
-      {revealed && (
-        <Link to="/categories">
-          <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Start New Game
-          </button>
-        </Link>
-      )}
     </div>
   );
 }

@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./componants/UI/Header";
-import Home from "./pages/home";
+import HomePage from "./pages/home";
 import Categories from "./pages/categories";
 import UsersPage from "./pages/users";
 import RevealPage from "./pages/revealPage";
 
+type User = {
+  id: string;
+  name: string;
+};
+
+type Categorie = {
+  cat_en: string;
+  cat_ar: string;
+};
+
 const App: React.FC = () => {
+  // Set viewport height for ios devices
   useEffect(() => {
     function setVH(): void {
       window.requestAnimationFrame(() => {
@@ -30,20 +41,31 @@ const App: React.FC = () => {
       }, 150);
     }
 
-    // Initialize and add listeners
     setVH();
     window.addEventListener("resize", watchVHChanges);
     window.addEventListener("orientationchange", watchVHChanges);
 
-    // Cleanup on unmount
+    function onLoad() {
+      const localStorageUsers = window.localStorage.getItem("users");
+      if (localStorageUsers) {
+        setUsers(JSON.parse(localStorageUsers));
+      }
+    }
+
+    onLoad();
+
     return () => {
       window.removeEventListener("resize", watchVHChanges);
       window.removeEventListener("orientationchange", watchVHChanges);
     };
   }, []);
 
-  const [winner, setWinner] = useState<string>("None");
-  const [lang, setLang] = useState("ar");
+  const [lang, setLang] = useState<"ar" | "en">("ar");
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedCategorie, setselectedCategorie] = useState<Categorie>({
+    cat_en: "",
+    cat_ar: "",
+  });
 
   const router = createBrowserRouter([
     {
@@ -57,21 +79,29 @@ const App: React.FC = () => {
       children: [
         {
           path: "/",
-          element: <Home lang={lang} />,
+          element: <HomePage lang={lang} />,
         },
         {
           path: "/categories",
-          element: <Categories lang={lang} />,
+          element: (
+            <Categories lang={lang} setCategorie={setselectedCategorie} />
+          ),
         },
         {
           path: "/users",
-          element: <UsersPage lang={lang} setWinner={setWinner} />,
+          element: <UsersPage lang={lang} users={users} setUsers={setUsers} />,
         },
       ],
     },
     {
       path: "/RevealPage",
-      element: <RevealPage winner={winner} />,
+      element: (
+        <RevealPage
+          lang={lang}
+          users={users}
+          selectedCategory={selectedCategorie}
+        />
+      ),
     },
   ]);
   return <RouterProvider router={router} />;

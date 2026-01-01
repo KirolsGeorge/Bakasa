@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 type HeaderProps = {
-  lang: string;
-  setLang: (lang: string) => void;
+  lang: "ar" | "en";
+  setLang: (lang: "ar" | "en") => void;
 };
 
 export default function Header({ lang, setLang }: HeaderProps) {
