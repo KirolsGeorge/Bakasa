@@ -1,4 +1,5 @@
 import ScratchCard from "../componants/ScratchCard";
+import { Topics } from "../componants/topics";
 
 type user = {
   id: string;
@@ -15,53 +16,53 @@ export default function RevealPage({
   users,
   selectedCategory,
 }: {
-  lang: string;
+  lang: "ar" | "en";
   users: user[];
   selectedCategory: category;
 }) {
-  localStorage.setItem("users", JSON.stringify(users));
-  const winner: user = users[Math.floor(Math.random() * users.length)];
+  function generateRandomNumber(length: number): number {
+    return Math.floor(Math.random() * length);
+  }
 
-  console.log(selectedCategory);
+  const data = new Topics();
+  const winner: user = users[generateRandomNumber(users.length)];
+  const choosenTopicNumber = generateRandomNumber(
+    data.categories.find((c) => c.name.en === selectedCategory.cat_en)?.items
+      .length!
+  );
+
+  const selectedTopic = data.categories.find(
+    (c) => c.name.en === selectedCategory.cat_en
+  )?.items[choosenTopicNumber];
+
+  console.log(selectedTopic);
   return (
-    // <main className="flex flex-col items-center justify-center">
-      <div className="carousel w-full overflow-hidden">
-        {users.map((user, index) => (
-          <div
-            key={user.id}
-            id={"slide" + (index + 1)}
-            className="carousel-item relative"
-          >
-            <h2>
-              {lang === "ar"
-                ? `ادي الموبايل ل ${user.name}`
-                : `Hand over the phone to ${user.name}`}
-            </h2>
-            <ScratchCard
-              width={200}
-              height={200}
-              winner={
-                user.name === winner.name
-                  ? `${
-                      lang === "ar"
-                        ? `${user.name} انت البكس`
-                        : "You are the biks"
-                    } `
-                  : `${
-                      lang === "ar"
-                        ? `${selectedCategory.cat_ar}`
-                        : `${selectedCategory.cat_en}`
-                    } `
-              }
-            />
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-              <a href={"#slide" + (index + 2)} className="btn btn-circle">
-                ❮
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    // </main>
+    <div className="carousel w-full">
+      {users.map((user, index) => (
+        <div
+          key={user.id}
+          id={"slide" + (index + 1)}
+          className="carousel-item relative"
+        >
+          <ScratchCard
+            width={200}
+            height={200}
+            winner={
+              user.name === winner.name
+                ? `${lang === "ar" ? `انت البكس` : "You are the biks"} `
+                : `${
+                    lang === "ar"
+                      ? `${selectedTopic!.ar}`
+                      : `${selectedTopic!.en}`
+                  } `
+            }
+            user={user.name}
+            lang={lang}
+            index={index}
+            max={users.length}
+          />
+        </div>
+      ))}
+    </div>
   );
 }

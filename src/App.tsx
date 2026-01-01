@@ -11,9 +11,14 @@ type User = {
   name: string;
 };
 
-type Categorie = {
+type Category = {
   cat_en: string;
   cat_ar: string;
+};
+
+type LocalStorage = {
+  users: User[];
+  category: Category;
 };
 
 const App: React.FC = () => {
@@ -45,27 +50,25 @@ const App: React.FC = () => {
     window.addEventListener("resize", watchVHChanges);
     window.addEventListener("orientationchange", watchVHChanges);
 
-    function onLoad() {
-      const localStorageUsers = window.localStorage.getItem("users");
-      if (localStorageUsers) {
-        setUsers(JSON.parse(localStorageUsers));
-      }
-    }
-
-    onLoad();
-
     return () => {
       window.removeEventListener("resize", watchVHChanges);
       window.removeEventListener("orientationchange", watchVHChanges);
     };
   }, []);
 
+  const localStorage: LocalStorage = {
+    users: JSON.parse(window.localStorage.getItem("users") as string),
+    category: JSON.parse(window.localStorage.getItem("category") as string),
+  };
+
   const [lang, setLang] = useState<"ar" | "en">("ar");
-  const [users, setUsers] = useState<User[]>([]);
-  const [selectedCategorie, setselectedCategorie] = useState<Categorie>({
-    cat_en: "",
-    cat_ar: "",
-  });
+  const [users, setUsers] = useState<User[]>(localStorage.users ?? []);
+  const [selectedCategorie, setselectedCategorie] = useState<Category>(
+    localStorage.category ?? {
+      cat_en: "",
+      cat_ar: "",
+    }
+  );
 
   const router = createBrowserRouter([
     {

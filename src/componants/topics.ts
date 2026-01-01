@@ -1,5 +1,11 @@
-const data = {
-  categories: [
+type DataStructure = {
+  name: { en: string; ar: string };
+  items: { en: string; ar: string }[];
+  image: string;
+}
+
+export class Topics {
+  categories: DataStructure[] = [
     {
       name: { en: "Cars", ar: "سيارات" },
       items: [
@@ -231,8 +237,6 @@ const data = {
       ],
       image: `Makeup.png`,
     },
-  ],
+  ]
 };
-
-export default data;
 

@@ -5,6 +5,10 @@ type ScratchCardProps = {
   height: number;
   revealPercent?: number;
   winner: string;
+  user: string;
+  lang: "ar" | "en";
+  index: number;
+  max: number;
 };
 
 export default function ScratchCard({
@@ -12,6 +16,10 @@ export default function ScratchCard({
   height,
   revealPercent = 35,
   winner,
+  user,
+  lang,
+  index,
+  max,
 }: ScratchCardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
@@ -70,7 +78,12 @@ export default function ScratchCard({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="font-bold mb-3">
+        {lang === "ar"
+          ? `${user} ادي الموبايل ل`
+          : `Hand over the phone to ${user}`}
+      </h2>
       <div style={{ width, height, position: "relative", userSelect: "none" }}>
         <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-center">
           {winner}
@@ -87,6 +100,13 @@ export default function ScratchCard({
             onPointerLeave={() => (isDrawing.current = false)}
             className="absolute inset-0 rounded-3xl cursor-pointer touch-none"
           />
+        )}
+        {revealed && index + 1 < max && (
+          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href={"#slide" + (index + 2)} className="btn btn-circle">
+              ❮
+            </a>
+          </div>
         )}
       </div>
     </div>
