@@ -38,7 +38,7 @@ export default function RevealPage({
   console.log(selectedTopic, winner);
   return (
     <main className="flex flex-col items-center justify-center flex-1">
-      <div className="carousel w-full">
+      <div className="carousel w-full touch-none">
         {users.map((user, index) => (
           <div
             key={user.id}
