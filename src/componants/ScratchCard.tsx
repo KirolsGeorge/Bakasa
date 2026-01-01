@@ -78,7 +78,7 @@ export default function ScratchCard({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <h2 className="font-bold mb-3">
         {lang === "ar"
           ? `${user} ادي الموبايل ل`
@@ -102,9 +102,9 @@ export default function ScratchCard({
           />
         )}
         {revealed && index + 1 < max && (
-          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href={"#slide" + (index + 2)} className="btn btn-circle">
-              ❮
+          <div className="absolute bottom-0 flex -translate-y-1/2  transform justify-center items-center right-0 left-0">
+            <a href={"#slide" + (index + 2)} className="btn">
+              {lang === "ar" ? "التالي" : "Next"}
             </a>
           </div>
         )}
