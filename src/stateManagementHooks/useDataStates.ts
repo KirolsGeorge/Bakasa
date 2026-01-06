@@ -11,6 +11,7 @@ export function useDataStates() {
   }
 
   function defineTopicANDBikis(users: User[], category: Category) {
+    if (users.length < 3) return;
     const data = new Topics();
     const topics: Topic[] = data.categories.find((c) => c.name.en === category.en)?.items || [];
     const choosenTopicNumber = topics && generateRandomNumber(topics.length);
