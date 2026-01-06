@@ -1,36 +1,30 @@
-import SwitchLanguage from "./languageSwitcher";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import SwitchLanguage from './languageSwitcher';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faX } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-type HeaderProps = {
-  lang: "ar" | "en";
-  setLang: (lang: "ar" | "en") => void;
-};
-
-export default function Header({ lang, setLang }: HeaderProps) {
-  const isNotHome = useLocation().pathname !== "/";
+export default function Header() {
+  const isNotHome = useLocation().pathname !== '/';
+  const isRevealPage = useLocation().pathname.includes('/RevealPage');
+  const revealPageColor = isRevealPage ? 'bg-red-600 text-black' : '';
 
   const navigate = useNavigate();
-
-  function switchLanguage() {
-    setLang(lang === "ar" ? "en" : "ar");
-  }
 
   function goBackHandler() {
     return navigate(-1);
   }
 
+  function goHome() {
+    return navigate('/');
+    
+  }
+
   return (
     <div className="flex flex-row-reverse items-center justify-between p-4">
-      <SwitchLanguage onClick={switchLanguage} />
+      <SwitchLanguage />
       {isNotHome && (
-        <button
-          className="btn btn-circle flex items-center justify-center"
-          onClick={goBackHandler}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} />
+        <button className={`btn btn-circle flex items-center justify-center ${revealPageColor}`} onClick={isRevealPage ? goHome : goBackHandler}>
+          <FontAwesomeIcon icon={isRevealPage ? faX : faArrowLeft} />
         </button>
       )}
     </div>

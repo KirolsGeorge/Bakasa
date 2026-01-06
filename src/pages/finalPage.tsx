@@ -15,19 +15,16 @@ type AppOutletContext = {
   };
 };
 
-export default function RevealPage() {
-  const { userState, dataStates } = useOutletContext<AppOutletContext>();
-  const { users } = userState;
-  const { bikis, selectedTopic } = dataStates;
+export default function FinalPage() {
+  const { dataStates } = useOutletContext<AppOutletContext>();
+  const { bikis } = dataStates;
 
   return (
     <main className="flex flex-col items-center justify-center flex-1 relative">
       <div className="absolute carousel w-full">
-        {users.map((user, index) => (
-          <div key={user.id} id={'slide' + (index + 1)} className="carousel-item relative w-full">
-            <ScratchCard width={200} height={200} user={user.name} index={index} max={users.length} selectedTopic={selectedTopic} bikis={bikis} />
-          </div>
-        ))}
+        <div className="carousel-item relative w-full">
+          <ScratchCard width={200} height={200} user="Elbikis" index={0} max={0} selectedTopic={{ en: '', ar: '' }} bikis={bikis} />
+        </div>
       </div>
     </main>
   );

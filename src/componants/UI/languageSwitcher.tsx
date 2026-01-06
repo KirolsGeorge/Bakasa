@@ -1,10 +1,9 @@
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
+import { useLanguage } from '../../stateManagementHooks/LanguageContext';
 
-type SwitchLanguageProps = {
-  onClick: () => void;
-};
+export default function SwitchLanguage() {
+  const { language, switchLanguage } = useLanguage();
 
-export default function SwitchLanguage({ onClick }: SwitchLanguageProps) {
   return (
     <div className="flex items-start justify-end">
       <motion.label
@@ -14,7 +13,7 @@ export default function SwitchLanguage({ onClick }: SwitchLanguageProps) {
           transition: { duration: 0.1 },
         }}
       >
-        <input type="checkbox" onClick={onClick} />
+        <input type="checkbox" checked={language === 'en'} onChange={switchLanguage} />
         <div className="swap-on">EN</div>
         <div className="swap-off">AR</div>
       </motion.label>
