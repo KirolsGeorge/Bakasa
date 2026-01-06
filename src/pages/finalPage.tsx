@@ -1,5 +1,4 @@
 import ScratchCard from '../componants/ScratchCard';
-
 import type { Topic, User, Category } from '../types';
 
 import { useOutletContext } from 'react-router-dom';
