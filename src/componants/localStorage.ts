@@ -7,7 +7,7 @@ export function loadUsers(): User[] {
 
 export function loadCategory(): Category {
   const localstorageSelectedCategory = window.localStorage.getItem('category');
-  return localstorageSelectedCategory ? JSON.parse(localstorageSelectedCategory) : { ar: '', en: '' };
+  return localstorageSelectedCategory ? JSON.parse(localstorageSelectedCategory) : { ar: 'سيارات', en: 'cars' };
 }
 
 export function saveUsers(users: User[]): void {
