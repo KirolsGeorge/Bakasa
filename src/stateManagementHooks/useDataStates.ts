@@ -12,12 +12,17 @@ export function useDataStates() {
 
   function defineTopicANDBikis(users: User[], category: Category) {
     if (users.length < 3) return;
-    const data = new Topics();
-    const topics: Topic[] = data.categories.find((c) => c.name.en === category.en)?.items || [];
-    const choosenTopicNumber = topics && generateRandomNumber(topics.length);
-    setSelectedTopic(topics[choosenTopicNumber]);
 
-    setBikis(users[generateRandomNumber(users.length)].name);
+    const data = new Topics();
+    const topics = data.categories.find((c) => c.name.en === category.en)?.items ?? [];
+
+    if (topics.length === 0) return;
+
+    const topicIndex = generateRandomNumber(topics.length);
+    const userIndex = generateRandomNumber(users.length);
+
+    setSelectedTopic(topics[topicIndex]);
+    setBikis(users[userIndex].name);
   }
 
   return { bikis, selectedTopic, defineTopicANDBikis };
