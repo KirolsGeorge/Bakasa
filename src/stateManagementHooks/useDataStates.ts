@@ -7,7 +7,8 @@ export function useDataStates() {
   const [selectedTopic, setSelectedTopic] = useState<Topic>({ ar: '', en: '' });
 
   function generateRandomNumber(length: number): number {
-    return Math.floor(Math.random() * length);
+    const number = length < 3 ? 3 : length;
+    return Math.floor(Math.random() * number);
   }
 
   function defineTopicANDBikis(users: User[], category: Category) {

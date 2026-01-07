@@ -20,14 +20,14 @@ export default function AppLayout() {
 
   useEffect(() => {
     saveUsers(users);
-    defineTopicANDBikis(users, category);
-    resetCategory;
+    users.length >= 3 && defineTopicANDBikis(users, category);
+    category && resetCategory;
   }, [users]);
 
   useEffect(() => {
     saveCategory(category);
-    defineTopicANDBikis(users, category);
-    resetCategory;
+    users.length >= 3 && defineTopicANDBikis(users, category);
+    category && resetCategory;
   }, [category]);
 
   return (
