@@ -13,7 +13,7 @@ export default function AppLayout() {
   const { users } = userState;
 
   const categoryState = useCategoryStates();
-  const { category, resetCategory } = categoryState;
+  const { category } = categoryState;
 
   const dataStates = useDataStates();
   const { defineTopicANDBikis } = dataStates;
@@ -21,13 +21,11 @@ export default function AppLayout() {
   useEffect(() => {
     saveUsers(users);
     users.length >= 3 && defineTopicANDBikis(users, category);
-    category && resetCategory;
   }, [users]);
 
   useEffect(() => {
     saveCategory(category);
     users.length >= 3 && defineTopicANDBikis(users, category);
-    category && resetCategory;
   }, [category]);
 
   return (

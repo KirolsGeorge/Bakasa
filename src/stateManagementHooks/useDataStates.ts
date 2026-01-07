@@ -7,23 +7,17 @@ export function useDataStates() {
   const [selectedTopic, setSelectedTopic] = useState<Topic>({ ar: '', en: '' });
 
   function generateRandomNumber(length: number): number {
-    const number = length < 3 ? 3 : length;
-    return Math.floor(Math.random() * number);
+    return Math.floor(Math.random() * length);
   }
 
   function defineTopicANDBikis(users: User[], category: Category) {
     if (users.length < 3) return;
-
     const data = new Topics();
-    const topics = data.categories.find((c) => c.name.en === category.en)?.items ?? [];
+    const topics: Topic[] = data.categories.find((c) => c.name.en === category.en)?.items || [];
+    const choosenTopicNumber = topics && generateRandomNumber(topics.length);
+    setSelectedTopic(topics[choosenTopicNumber]);
 
-    if (topics.length === 0) return;
-
-    const topicIndex = generateRandomNumber(topics.length);
-    const userIndex = generateRandomNumber(users.length);
-
-    setSelectedTopic(topics[topicIndex]);
-    setBikis(users[userIndex].name);
+    setBikis(users[generateRandomNumber(users.length)].name);
   }
 
   return { bikis, selectedTopic, defineTopicANDBikis };
